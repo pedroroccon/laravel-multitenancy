@@ -17,6 +17,11 @@ class TenantScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('tenant_id', 1);
+        // Verifica o ID do inquilino registrado 
+        // na sessão, e então aplica a filtro 
+        // de forma global.
+        if (session()->has('tenant_id')) {
+            $builder->where('tenant_id', session()->get('tenant_id'));
+        }
     }
 }
