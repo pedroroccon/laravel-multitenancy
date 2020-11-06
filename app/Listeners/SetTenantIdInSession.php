@@ -27,6 +27,6 @@ class SetTenantIdInSession
     {
         // Definindo o ID do inquilino referente 
         // ao usuário.
-        session()->put('tenant_id', $event->user->tentant_id);
+        session()->put('tenant_id', $event->user->tenant_id);
     }
 }
