@@ -4,15 +4,16 @@ namespace App\Traits;
 
 use App\Scopes\TenantScope;
 
-trait HasTenant {
+trait BelongsToTenant {
 
-	// Utilizamos a trait HasTenant
+	// Utilizamos a trait BelongsToTenant
 	// para definirmos regras de negócio 
 	// específicas para modelos que necessitam 
 	// herdar as regras de ter um Tenant associado 
-	// a ele.
-
-	protected static function booted()
+	// a ele. Alterando o nome bootBelongsToTenant 
+    // garante que não iremos sobrescrever a função 
+    // principal do nosso model. 
+	protected static function bootBelongsToTenant()
     {
         static::addGlobalScope(new TenantScope);
 
