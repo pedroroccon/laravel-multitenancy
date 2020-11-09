@@ -13,48 +13,32 @@
 
                 <div class="mt-8">
                     <div class="mt-6">
-                        {{ $errors }}
                         <form wire:submit.prevent="register">
-                            <div>
-                                <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
-                                    Nome completo
-                                </label>
-                                <div class="mt-1 rounded-md shadow-sm">
-                                    <input
-                                        wire:model="name" id="name" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                            </div>
-                            <div class="mt-6">
-                                <label for="companyName" class="block text-sm font-medium leading-5 text-gray-700">
-                                    Empresa
-                                </label>
-                                <div class="mt-1 rounded-md shadow-sm">
-                                    <input
-                                        wire:model="companyName"
-                                        id="companyName" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                            </div>
-                            <div class="mt-6">
-                                <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
-                                    Endereço de e-mail
-                                </label>
-                                <div class="mt-1 rounded-md shadow-sm">
-                                    <input
-                                        wire:model="email"
-                                        id="email" type="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                            </div>
 
-                            <div class="mt-6">
-                                <label for="password" class="block text-sm font-medium leading-5 text-gray-700">
-                                    Digite sua senha
-                                </label>
-                                <div class="mt-1 rounded-md shadow-sm">
-                                    <input
-                                        wire:model="password"
-                                        id="password" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                </div>
-                            </div>
+                            <!--
+                                Utilizamos o debounce para não enviar 
+                                requisições até que o usuário realmente termine 
+                                de digitar as informações. Para isso utilizamos o 
+                                "attributes bag" em nosso Registro.php
+                            -->
+
+                            <x-text-input
+                                wire:model.debounce.100ms="name" 
+                                type="text" label="Nome completo" :required="true" placeholder="Qual seu nome completo?" class="mt-4" />
+                            <x-text-input
+                                wire:model.debounce.100ms="companyName" 
+                                type="text" label="Empresa" :required="true" placeholder="Digite a razão social" class="mt-4" />
+                            <x-text-input
+                                wire:model.debounce.100ms="email" 
+                                type="email" label="E-mail" :required="true" placeholder="dominio@dominio.com.br" class="mt-4" />
+                            <x-text-input
+                                wire:model.debounce.100ms="password"
+                                type="password" label="Senha" :required="true" placeholder="" class="mt-4" />
+                            <small class="block mt-2 text-gray-500 text-xs">
+                                - Utilize senhas fortes;<br>
+                                - Mínimo de 8 caractéres;<br>
+                                - Utilize letras e números;
+                            </small>
 
                             <div class="mt-6">
                                 <span class="block w-full rounded-md shadow-sm">

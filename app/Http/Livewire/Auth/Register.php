@@ -30,7 +30,7 @@ class Register extends Component
             'name' => ['required'],
             'companyName' => ['required', 'string', 'unique:tenants,name'], 
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+            'password' => ['required', 'min:8'],
         ]);
 
         $tenant = Tenant::create(['name' => $this->companyName]);
@@ -48,6 +48,10 @@ class Register extends Component
         Auth::login($user, true);
 
         return redirect()->intended(route('home'));
+    }
+
+    public function updated($value) {
+        $this->resetErrorBag($value);
     }
 
     public function render()
